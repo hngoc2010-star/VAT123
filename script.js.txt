@@ -1,0 +1,148 @@
+const priceM3 = document.getElementById("priceM3");
+const priceSheet = document.getElementById("priceSheet");
+
+function numberValue(v){
+return Number(String(v).replace(/,/g,"")) || 0;
+}
+
+function formatNumber(v){
+return Math.round(v).toLocaleString("en-US");
+}
+
+function formatInput(input){
+
+let value=input.value.replace(/,/g,"");
+
+if(value==="") return;
+
+input.value=Number(value).toLocaleString("en-US");
+}
+
+function calculate(){
+
+const thicknessBuy=
+parseFloat(document.getElementById("thicknessBuy").value)||0;
+
+const thicknessVat=
+parseFloat(document.getElementById("thicknessVat").value)||0;
+
+const width=
+parseFloat(document.getElementById("width").value)||0;
+
+const length=
+parseFloat(document.getElementById("length").value)||0;
+
+const bundles=
+parseFloat(document.getElementById("bundles").value)||0;
+
+const pcsBundle=
+parseFloat(document.getElementById("pcsBundle").value)||0;
+
+const pcs=bundles*pcsBundle;
+
+const cbmBuy=
+(thicknessBuy/1000)*
+(width/1000)*
+(length/1000)*
+pcs;
+
+const cbmVat=
+(thicknessVat/1000)*
+(width/1000)*
+(length/1000)*
+pcs;
+
+let amount=0;
+let vatPriceM3=0;
+
+if(priceM3.value.trim()!==""){
+
+const pricePerM3=
+numberValue(priceM3.value);
+
+amount=
+pricePerM3*cbmBuy;
+
+vatPriceM3=
+cbmVat>0
+? amount/cbmVat
+:0;
+}
+else if(priceSheet.value.trim()!==""){
+
+const sheetPrice=
+numberValue(priceSheet.value);
+
+amount=
+sheetPrice*pcs;
+
+vatPriceM3=
+cbmVat>0
+? amount/cbmVat
+:0;
+}
+
+const vat8=
+amount*0.08;
+
+const total=
+amount+vat8;
+
+document.getElementById("pcs").innerText=
+formatNumber(pcs);
+
+document.getElementById("cbmBuy").innerText=
+cbmBuy.toFixed(2);
+
+document.getElementById("cbmVat").innerText=
+cbmVat.toFixed(2);
+
+document.getElementById("vatPrice").innerText=
+formatNumber(vatPriceM3);
+
+document.getElementById("amount").innerText=
+formatNumber(amount);
+
+document.getElementById("vat8").innerText=
+formatNumber(vat8);
+
+document.getElementById("total").innerText=
+formatNumber(total);
+}
+
+priceM3.addEventListener("input",()=>{
+
+if(priceM3.value.trim()!==""){
+priceSheet.value="";
+}
+
+formatInput(priceM3);
+
+calculate();
+});
+
+priceSheet.addEventListener("input",()=>{
+
+if(priceSheet.value.trim()!==""){
+priceM3.value="";
+}
+
+formatInput(priceSheet);
+
+calculate();
+});
+
+document.querySelectorAll("input").forEach(input=>{
+
+if(
+input.id==="priceM3" ||
+input.id==="priceSheet"
+){
+return;
+}
+
+input.addEventListener("input",calculate);
+
+});
+
+calculate();

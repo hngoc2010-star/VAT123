@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Plywood VAT</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<meta name="theme-color" content="#0d6efd">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Plywood VAT</h1>
+
+<div class="row">
+<label>Thickness Buy</label>
+<input id="thicknessBuy" type="number" step="0.1" value="10.5">
+</div>
+
+<div class="row">
+<label>Thickness VAT</label>
+<input id="thicknessVat" type="number" step="0.1" value="11">
+</div>
+
+<div class="row">
+<label>Width (mm)</label>
+<input id="width" type="number" value="1220">
+</div>
+
+<div class="row">
+<label>Length (mm)</label>
+<input id="length" type="number" value="2440">
+</div>
+
+<div class="row">
+<label>Bundles</label>
+<input id="bundles" type="number" value="18">
+</div>
+
+<div class="row">
+<label>PCS / Bundle</label>
+<input id="pcsBundle" type="number" value="90">
+</div>
+
+<div class="row">
+<label>VND/m³</label>
+<input id="priceM3" type="text" placeholder="Nhập VND/m³">
+</div>
+
+<div class="row">
+<label>VND/Tấm</label>
+<input id="priceSheet" type="text" placeholder="Nhập VND/Tấm">
+</div>
+
+<hr>
+
+<div class="result">
+<span>PCS</span>
+<span id="pcs">0</span>
+</div>
+
+<div class="result">
+<span>CBM Buy</span>
+<span id="cbmBuy">0</span>
+</div>
+
+<div class="result">
+<span>CBM VAT</span>
+<span id="cbmVat">0</span>
+</div>
+
+<div class="result">
+<span>VAT Price/m³</span>
+<span id="vatPrice">0</span>
+</div>
+
+<div class="result">
+<span>Amount</span>
+<span id="amount">0</span>
+</div>
+
+<div class="result">
+<span>VAT 8%</span>
+<span id="vat8">0</span>
+</div>
+
+<hr>
+
+<div class="total">
+<span>Total</span>
+<span id="total">0</span>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
